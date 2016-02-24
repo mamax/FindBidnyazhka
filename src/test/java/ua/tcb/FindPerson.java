@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.tcb.pages.HomePage;
+import ua.tcb.pages.TravelPage;
 import ua.tcb.webdriver.BasicTestCase;
 
 import java.io.IOException;
@@ -53,15 +54,51 @@ public class FindPerson extends BasicTestCase {
 
     @Test
     public void testFindPerson() throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+
         HomePage homePage = new HomePage(driver);
-        homePage.navigateToTravels();
+        TravelPage travelPage = homePage.navigateToTravelPage();
 
-        //some code to to on firstpage
+        //some code to to on first page
+        selectJourney(wait, travelPage);
 
-        for (int i = 0; i< homePage.getListOfPages().size() - 1; i++){
-            homePage.getListOfPages().get(i).click();
-
-            //some code to to on firstpage
+        //some code to go on father pages
+        for (int i = 0; i < travelPage.getListOfPages().size() - 1; i++) {
+            travelPage.getListOfPages().get(i).click();
+            selectJourney(wait, travelPage);
         }
     }
+
+    private void selectJourney(WebDriverWait wait, TravelPage travelPage) {
+        for (int j = 0; j < travelPage.getEntryBlock().getOrderButtons().size(); j++){
+            travelPage.getEntryBlock().getOrderButtons().get(j).click();
+
+            if (isPresentAndDisplayed(travelPage.getContentBlock().getErrorMsg())){
+                driver.navigate().back();
+            }
+            else
+            {
+                travelPage.getContentBlock().registerClick();
+                travelPage.getContentBlock().radioBtnClick();
+                wait.until(ExpectedConditions.visibilityOf(travelPage.getContentBlock().getPlaceTable()));
+
+                for (int tr=1; tr <= travelPage.getContentBlock().getListOfTrs().size(); tr++){
+                    for(int td = 1;td <= travelPage.getContentBlock().getListOfTds().size(); td++){
+                        if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains("Гарбар Валентина")){
+//                            takescreenshot();
+                            System.out.println("Знайшов");
+                            break;
+                        }
+                        else
+                            {
+                                driver.navigate().back();
+                                driver.navigate().back();
+                            }
+                    }
+                }
+
+            }
+        }
+    }
+
 }

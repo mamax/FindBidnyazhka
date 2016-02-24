@@ -1,7 +1,9 @@
 package ua.tcb.webdriver;
 
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.annotations.AfterTest;
@@ -56,6 +58,15 @@ public class BasicTestCase {
             driver.get("https://tcb.vn.ua/");
         }
         return driver;
+    }
+
+    protected boolean isPresentAndDisplayed(WebElement element) {
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
 }

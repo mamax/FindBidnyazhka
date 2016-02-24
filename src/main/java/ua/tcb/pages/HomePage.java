@@ -28,12 +28,6 @@ public class HomePage extends Page {
     @FindBy(xpath = "//a[@href='/?logout']")
     private WebElement logout;
 
-    public List<WebElement> getListOfPages() {
-        return listOfPages;
-    }
-
-    @FindBy(xpath = "//center/a")
-    private List<WebElement> listOfPages;
 
     public WebElement getList() {
         return list;
@@ -63,7 +57,8 @@ public class HomePage extends Page {
         linkFb.click();
     }
 
-    public void navigateToTravels() {
+    public TravelPage navigateToTravelPage() throws IOException {
         travel.click();
+        return new TravelPage(driver);
     }
 }
