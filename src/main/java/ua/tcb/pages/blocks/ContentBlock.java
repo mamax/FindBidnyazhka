@@ -2,6 +2,7 @@ package ua.tcb.pages.blocks;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Name;
 import ua.tcb.common.CommElements;
 
 import java.util.List;
@@ -9,14 +10,11 @@ import java.util.List;
 /**
  * Created by msks on 24.02.2016.
  */
+@Name("Content block")
 @FindBy(xpath = "//div[@class='contentpadding']")
 public class ContentBlock extends CommElements {
 
-    @FindBy(xpath = "//input[@value=\"Зареєструвати!\"]")
-    private WebElement register;
 
-    @FindBy(xpath = "//input[@type='radio']")
-    private WebElement radioBtn;
 
     @FindBy(xpath = "//table[@class='bus']/tbody/tr")
     private List<WebElement> listOfTrs;
@@ -38,13 +36,13 @@ public class ContentBlock extends CommElements {
     @FindBy(xpath = "//table[@class='bus']")
     private WebElement placeTable;
 
-    public void registerClick() {
-        register.click();
-    }
-
-    public void radioBtnClick() {
-        radioBtn.click();
-    }
+//    @Name("radio button")
+//    @FindBy(xpath = "//input[@type='radio']")
+//    private WebElement radioBtn;
+//
+//    public void radioBtnClick() {
+//        radioBtn.click();
+//    }
 
     public List<WebElement> getListOfTrs() {
         return listOfTrs;

@@ -69,6 +69,12 @@
                 <version>2.5</version>
                 <inherited>true</inherited>
                 <configuration>
+                    <properties>
+                        <property>
+                            <name>outputDir</name>
+                            <value>target/surefire-reports/html</value>
+                        </property>
+                    </properties>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>

@@ -17,7 +17,7 @@ public class EntryBlock extends CommElements {
         return orderButtons;
     }
 
-    @FindBy(xpath = "//a[text()='Замовити']")
+    @FindBy(xpath = "//a[text()='Р—Р°СЂРµС”СЃС‚СЂСѓРІР°С‚Рё!']")
     private List<WebElement> orderButtons;
 
     @FindBy(xpath = "//div[@class='redblock']")

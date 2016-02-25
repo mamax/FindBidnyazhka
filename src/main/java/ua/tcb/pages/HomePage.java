@@ -4,8 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.io.IOException;
-
 /**
  * Created by Maksym_Mazurkevych on 2/24/2016.
  */
@@ -24,7 +22,7 @@ public class HomePage extends Page {
     @FindBy(xpath = "//a[@href='/?logout']")
     private WebElement logout;
 
-    public HomePage(WebDriver driver) throws IOException {
+    public HomePage(WebDriver driver) {
         super(driver);
     }
 

@@ -19,8 +19,6 @@ public abstract class Page extends CommElements{
     protected WebDriverWait wait;
 
     public Page(WebDriver driver) {
-//        this.driver = BasicTestCase.setUp();
-//        HtmlElementLoader.populatePageObject(this, driver);
 ////        PageFactory.initElements(driver, this);
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 15);

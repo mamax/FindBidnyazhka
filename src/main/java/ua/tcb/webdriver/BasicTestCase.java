@@ -1,18 +1,14 @@
 package ua.tcb.webdriver;
 
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import ua.tcb.data.UserData;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,15 +16,36 @@ import java.util.concurrent.TimeUnit;
  */
 public class BasicTestCase {
 
-//    protected static WebDriver driver;
     public static final String BROWSER_FF = "firefox";
     private static boolean isBrowserOpened = false;
-    public static WebDriver dr = null;
     public static FirefoxDriver driver = null;
-    public static Properties CONFIG = null;
+
     protected static String baseUrl =  "https://tcb.vn.ua";
+    protected static String nameToFind = "Никитюк";
+//    private static boolean isInitialized = false;
+//    public static Properties CONFIG = null;
 
     public UserData admin = new UserData("maksim.mazurkevych@gmail.com", "gtnhjdbx2014");
+
+//    @BeforeSuite
+//    public static String initializeBaseUrl() {
+//
+//        if (!isInitialized) {
+//            CONFIG = new Properties();
+//            FileInputStream ip;
+//            try {
+//                ip = new FileInputStream(System.getProperty("user.dir") + "//src//test//resources//config.properties");
+//                CONFIG.load(ip);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            isInitialized = true;
+//            nameToFind = CONFIG.getProperty("nameToFind");
+//            System.out.println(nameToFind);
+//        }
+//
+//        return nameToFind;
+//    }
 
     @AfterTest(alwaysRun = true)
     public void tearDown() throws Exception {
@@ -40,12 +57,12 @@ public class BasicTestCase {
     public static WebDriver setUp() throws IOException {
         if (!isBrowserOpened) {
 
-            FirefoxProfile profile = new FirefoxProfile();
-            profile.addExtension(new File(System.getProperty("user.dir")
-                    + "//src//main//resources//firebug-2.0.14-fx.xpi"));
-            profile.addExtension(new File(System.getProperty("user.dir")
-                    + "//src//main//resources//firepath-0.9.7.1-fx.xpi"));
-            driver = new FirefoxDriver(profile);
+//            FirefoxProfile profile = new FirefoxProfile();
+//            profile.addExtension(new File(System.getProperty("user.dir")
+//                    + "//src//main//resources//firebug-2.0.14-fx.xpi"));
+//            profile.addExtension(new File(System.getProperty("user.dir")
+//                    + "//src//main//resources//firepath-0.9.7.1-fx.xpi"));
+            driver = new FirefoxDriver();
             System.out.println("Opening " + BROWSER_FF);
             isBrowserOpened = true;
             driver.manage().window().setSize(new Dimension(1024, 1024));
@@ -58,6 +75,15 @@ public class BasicTestCase {
             driver.get("https://tcb.vn.ua/");
         }
         return driver;
+    }
+
+    protected static void captureScreenshot(String fileName) throws IOException {
+        try {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + fileName + ".jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected boolean isPresentAndDisplayed(WebElement element) {

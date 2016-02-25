@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ua.tcb.pages.FirstStepBuy;
 import ua.tcb.pages.HomePage;
 import ua.tcb.pages.TravelPage;
 import ua.tcb.webdriver.BasicTestCase;
@@ -17,26 +18,29 @@ import java.io.IOException;
 public class FindPerson extends BasicTestCase {
 
     @BeforeMethod
-    public void logToApp() throws InterruptedException, IOException {
+    public void logToApp() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         HomePage homePage = new HomePage(driver);
         homePage.loginToolbarClick();
-        String winHandleBefore = driver.getWindowHandle();
+
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(1));
 //        driver.switchTo().frame(1);
-//        driver.findElement(By.xpath("//div[@id='wrapper']"));
+        driver.switchTo().activeElement();
 
-        Thread.sleep(4000L);
+        Thread.sleep(7000L);
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='facebook']/a")));
         driver.findElement(By.xpath("//div[@id='facebook']/a")).click();
+        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
+        String winHandleBefore = driver.getWindowHandle();
+        //switch to another window
 //        driver.switchTo().defaultContent();
         for(String winHandle : driver.getWindowHandles()){
             driver.switchTo().window(winHandle);
         }
-
+//      actions on another page
         driver.findElement(By.id("email")).sendKeys(admin.name);
         driver.findElement(By.id("pass")).sendKeys(admin.pass);
         driver.findElement(By.id("loginbutton")).click();
@@ -47,7 +51,6 @@ public class FindPerson extends BasicTestCase {
         // Switch back to original browser (first window)
         driver.switchTo().window(winHandleBefore);
 
-//        wait.until(ExpectedConditions.visibilityOf(homePage.getList()));
         Thread.sleep(1000L);
         wait.until(ExpectedConditions.visibilityOf(homePage.getLogout()));
     }
@@ -63,42 +66,51 @@ public class FindPerson extends BasicTestCase {
         selectJourney(wait, travelPage);
 
         //some code to go on father pages
+        travelPage = new TravelPage(driver);
         for (int i = 0; i < travelPage.getListOfPages().size() - 1; i++) {
-            travelPage.getListOfPages().get(i).click();
+            driver.get(baseUrl +"/travel/?pageq=" + (2+i));
             selectJourney(wait, travelPage);
         }
     }
 
-    private void selectJourney(WebDriverWait wait, TravelPage travelPage) {
-        for (int j = 0; j < travelPage.getEntryBlock().getOrderButtons().size(); j++){
-            travelPage.getEntryBlock().getOrderButtons().get(j).click();
+    private void selectJourney(WebDriverWait wait, TravelPage travelPage) throws IOException {
+        outer:
+        for (int j = 0; j < driver.findElements(By.xpath("//a[text()='Ð—Ð°Ð¼Ð¾Ð²Ð¸Ñ‚Ð¸']")).size(); j++){
+            driver.findElements(By.xpath("//a[text()='Ð—Ð°Ð¼Ð¾Ð²Ð¸Ñ‚Ð¸']")).get(j).click();
+            FirstStepBuy firstStepBuy = new FirstStepBuy(driver);
 
-            if (isPresentAndDisplayed(travelPage.getContentBlock().getErrorMsg())){
+            if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
                 driver.navigate().back();
             }
             else
             {
-                travelPage.getContentBlock().registerClick();
-                travelPage.getContentBlock().radioBtnClick();
-                wait.until(ExpectedConditions.visibilityOf(travelPage.getContentBlock().getPlaceTable()));
-
-                for (int tr=1; tr <= travelPage.getContentBlock().getListOfTrs().size(); tr++){
-                    for(int td = 1;td <= travelPage.getContentBlock().getListOfTds().size(); td++){
-                        if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains("Ãàðáàð Âàëåíòèíà")){
-//                            takescreenshot();
-                            System.out.println("Çíàéøîâ");
-                            break;
-                        }
-                        else
-                            {
-                                driver.navigate().back();
-                                driver.navigate().back();
-                            }
-                    }
+                firstStepBuy.registerClick();
+                if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
+                    navigateBackTwoTimes();
                 }
+                else {
+                    firstStepBuy.radioBtnClick();
+                    wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getContentBlock().getPlaceTable()));
 
+                    for (int tr = 1; tr <= firstStepBuy.getContentBlock().getListOfTrs().size(); tr++)
+                        for (int td = 1; td <= firstStepBuy.getContentBlock().getListOfTds().size(); td++) {
+                            System.out.println(driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title"));
+                            if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains(nameToFind)) {
+                                System.out.println("found");
+                                captureScreenshot(nameToFind);
+                                navigateBackTwoTimes();
+                                break outer;
+                            }
+                        }
+                    navigateBackTwoTimes();
+                }
             }
         }
+    }
+
+    private void navigateBackTwoTimes() {
+        driver.navigate().back();
+        driver.navigate().back();
     }
 
 }

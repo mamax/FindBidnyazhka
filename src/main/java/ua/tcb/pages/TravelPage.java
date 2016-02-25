@@ -1,17 +1,14 @@
 package ua.tcb.pages;
 
 import org.openqa.selenium.WebDriver;
-import ua.tcb.pages.blocks.ContentBlock;
 import ua.tcb.pages.blocks.EntryBlock;
-
-import java.io.IOException;
 
 /**
  * Created by msks on 24.02.2016.
  */
 public class TravelPage extends Page {
 
-    public TravelPage(WebDriver driver) throws IOException {
+    public TravelPage(WebDriver driver) {
         super(driver);
     }
 
@@ -26,9 +23,16 @@ public class TravelPage extends Page {
 
     EntryBlock entryBlock;
 
-    public ContentBlock getContentBlock() {
-        return contentBlock;
-    }
 
-    ContentBlock contentBlock;
+
+//    public List<WebElement> getOrderButtons() {
+//        return orderButtons;
+//    }
+//
+//    @FindBy(xpath = "//a[text()='Замовити']")
+//    private List<WebElement> orderButtons;
+//
+//    @FindBy(xpath = "//div[@class='redblock']")
+//    private WebElement errors;
+
 }
