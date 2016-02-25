@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Maksym_Mazurkevych on 2/24/2016.
@@ -15,10 +14,7 @@ public class HomePage extends Page {
     @FindBy(xpath = "//a[@id='uLogin']/img")
     private WebElement logToolbar;
 
-    @FindBy(xpath = "//div[@id='facebook']/a")
-    private WebElement linkFb;
-
-    @FindBy(xpath = "//a[@href=\"/travel/\"]")
+    @FindBy(xpath = "//a[@href='/travel/']")
     private WebElement travel;
 
     public WebElement getLogout() {
@@ -27,14 +23,6 @@ public class HomePage extends Page {
 
     @FindBy(xpath = "//a[@href='/?logout']")
     private WebElement logout;
-
-
-    public WebElement getList() {
-        return list;
-    }
-
-    @FindBy(xpath = "//div[@id='wrapper']")
-    private WebElement list;
 
     public HomePage(WebDriver driver) throws IOException {
         super(driver);
@@ -49,15 +37,7 @@ public class HomePage extends Page {
         logToolbar.click();
     }
 
-    public WebElement getLinkFb() {
-        return linkFb;
-    }
-
-    public void clickFacebook() {
-        linkFb.click();
-    }
-
-    public TravelPage navigateToTravelPage() throws IOException {
+    public TravelPage navigateToTravelPage(){
         travel.click();
         return new TravelPage(driver);
     }
