@@ -77,7 +77,7 @@ public class FindPerson extends BasicTestCase {
         for (int j = 0; j < driver.findElements(By.xpath("//a[text()='Замовити']")).size(); j++){
             driver.findElements(By.xpath("//a[text()='Замовити']")).get(j).click();
             FirstStepBuy firstStepBuy = new FirstStepBuy(driver);
-
+            System.out.println("----- " +firstStepBuy.getH3tag().getText()+ "------");
             if (isPresentAndDisplayed(firstStepBuy.getContentBlock().getErrorMsg())){
                 driver.navigate().back();
             }
@@ -96,7 +96,7 @@ public class FindPerson extends BasicTestCase {
                             System.out.println(driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title"));
                             if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains(nameToFind)) {
                                 System.out.println("found");
-                                captureScreenshot(nameToFind);
+                                captureScreenShot(nameToFind);
                                 navigateBackTwoTimes();
                                 break outer;
                             }

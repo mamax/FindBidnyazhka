@@ -32,4 +32,10 @@ public class FirstStepBuy extends Page {
     @FindBy(xpath = "//div[@class='redblock']")
     private WebElement errorMsg;
 
+    @FindBy(xpath = "//h3")
+    private WebElement h3tag;
+
+    public WebElement getH3tag() {
+        return h3tag;
+    }
 }

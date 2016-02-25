@@ -3,6 +3,7 @@ package ua.tcb.webdriver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import ua.tcb.data.UserData;
@@ -57,12 +58,12 @@ public class BasicTestCase {
     public static WebDriver setUp() throws IOException {
         if (!isBrowserOpened) {
 
-//            FirefoxProfile profile = new FirefoxProfile();
-//            profile.addExtension(new File(System.getProperty("user.dir")
-//                    + "//src//main//resources//firebug-2.0.14-fx.xpi"));
-//            profile.addExtension(new File(System.getProperty("user.dir")
-//                    + "//src//main//resources//firepath-0.9.7.1-fx.xpi"));
-            driver = new FirefoxDriver();
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.addExtension(new File(System.getProperty("user.dir")
+                    + "//src//main//resources//firebug-2.0.14-fx.xpi"));
+            profile.addExtension(new File(System.getProperty("user.dir")
+                    + "//src//main//resources//firepath-0.9.7.1-fx.xpi"));
+            driver = new FirefoxDriver(profile);
             System.out.println("Opening " + BROWSER_FF);
             isBrowserOpened = true;
             driver.manage().window().setSize(new Dimension(1024, 1024));
@@ -77,7 +78,7 @@ public class BasicTestCase {
         return driver;
     }
 
-    protected static void captureScreenshot(String fileName) throws IOException {
+    protected static void captureScreenShot(String fileName) throws IOException {
         try {
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + fileName + ".jpg"));
