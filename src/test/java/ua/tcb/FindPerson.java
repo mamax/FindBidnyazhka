@@ -63,33 +63,32 @@ public class FindPerson extends BasicTestCase {
         TravelPage travelPage = homePage.navigateToTravelPage();
 
         //some code to to on first page
-        selectJourney(wait, travelPage);
+        selectJourney(wait);
 
         //some code to go on father pages
-        travelPage = new TravelPage(driver);
         for (int i = 0; i < travelPage.getListOfPages().size() - 1; i++) {
             driver.get(baseUrl +"/travel/?pageq=" + (2+i));
-            selectJourney(wait, travelPage);
+            selectJourney(wait);
         }
     }
 
-    private void selectJourney(WebDriverWait wait, TravelPage travelPage) throws IOException {
+    private void selectJourney(WebDriverWait wait) throws IOException {
         outer:
         for (int j = 0; j < driver.findElements(By.xpath("//a[text()='Замовити']")).size(); j++){
             driver.findElements(By.xpath("//a[text()='Замовити']")).get(j).click();
             FirstStepBuy firstStepBuy = new FirstStepBuy(driver);
 
-            if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
+            if (isPresentAndDisplayed(firstStepBuy.getContentBlock().getErrorMsg())){
                 driver.navigate().back();
             }
             else
             {
-                firstStepBuy.registerClick();
+                firstStepBuy.getContentBlock().registerClick();
                 if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
                     navigateBackTwoTimes();
                 }
                 else {
-                    firstStepBuy.radioBtnClick();
+                    firstStepBuy.getContentBlock().radioBtnClick();
                     wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getContentBlock().getPlaceTable()));
 
                     for (int tr = 1; tr <= firstStepBuy.getContentBlock().getListOfTrs().size(); tr++)

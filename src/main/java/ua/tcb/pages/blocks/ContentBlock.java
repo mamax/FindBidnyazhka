@@ -14,20 +14,11 @@ import java.util.List;
 @FindBy(xpath = "//div[@class='contentpadding']")
 public class ContentBlock extends CommElements {
 
-
-
     @FindBy(xpath = "//table[@class='bus']/tbody/tr")
     private List<WebElement> listOfTrs;
 
     @FindBy(xpath = "//table[@class='bus']/tbody/tr[1]/td")
     private List<WebElement> listOfTds;
-
-    public WebElement getErrorMsg() {
-        return errorMsg;
-    }
-
-    @FindBy(xpath = "//div[@class='redblock']")
-    private WebElement errorMsg;
 
     public WebElement getPlaceTable() {
         return placeTable;
@@ -36,13 +27,27 @@ public class ContentBlock extends CommElements {
     @FindBy(xpath = "//table[@class='bus']")
     private WebElement placeTable;
 
-//    @Name("radio button")
-//    @FindBy(xpath = "//input[@type='radio']")
-//    private WebElement radioBtn;
-//
-//    public void radioBtnClick() {
-//        radioBtn.click();
-//    }
+    @Name("radio button")
+    @FindBy(xpath = "//input[@type='radio']")
+    private WebElement radioBtn;
+
+    public void radioBtnClick() {
+        radioBtn.click();
+    }
+
+    @FindBy(xpath = "//input[@value='Зареєструвати!']")
+    private WebElement register;
+
+    public void registerClick() {
+        register.click();
+    }
+
+    public WebElement getErrorMsg() {
+        return errorMsg;
+    }
+
+    @FindBy(xpath = "//div[@class='redblock']")
+    private WebElement errorMsg;
 
     public List<WebElement> getListOfTrs() {
         return listOfTrs;

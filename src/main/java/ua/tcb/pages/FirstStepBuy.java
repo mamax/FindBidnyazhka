@@ -25,31 +25,11 @@ public class FirstStepBuy extends Page {
 
     private ContentBlock contentBlock;
 
-    @FindBy(xpath = "//input[@value='Зареєструвати!']")
-    private WebElement register;
-
-    public void registerClick() {
-        register.click();
-    }
-
     public WebElement getErrorMsg() {
         return errorMsg;
     }
 
     @FindBy(xpath = "//div[@class='redblock']")
     private WebElement errorMsg;
-
-    @Name("radio button")
-    @FindBy(xpath = "//input[@type='radio']")
-    private WebElement radioBtn;
-
-
-    public WebElement getRadioBtn() {
-        return radioBtn;
-    }
-
-    public void radioBtnClick() {
-        radioBtn.click();
-    }
 
 }

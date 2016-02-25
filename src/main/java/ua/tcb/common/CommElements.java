@@ -11,14 +11,6 @@ import java.util.List;
 @FindBy(xpath="//div[contains(@class,'main')]")
 public class CommElements extends HtmlElement {
 
-    public List<WebElement> getListOfPages() {
-        return listOfPages;
-    }
-
-    @FindBy(xpath = "//center/a")
-    private List<WebElement> listOfPages;
-
-
     private static final String BROWSER_FF = "firefox";
 //    protected WebDriver driver;
 

@@ -1,7 +1,11 @@
 package ua.tcb.pages;
 
 import org.openqa.selenium.WebDriver;
-import ua.tcb.pages.blocks.EntryBlock;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import ua.tcb.pages.blocks.ContentBlock;
+
+import java.util.List;
 
 /**
  * Created by msks on 24.02.2016.
@@ -17,22 +21,11 @@ public class TravelPage extends Page {
         driver.get(baseUrl + "travel/");
     }
 
-    public EntryBlock getEntryBlock() {
-        return entryBlock;
+    public List<WebElement> getListOfPages() {
+        return listOfPages;
     }
 
-    EntryBlock entryBlock;
-
-
-
-//    public List<WebElement> getOrderButtons() {
-//        return orderButtons;
-//    }
-//
-//    @FindBy(xpath = "//a[text()='Замовити']")
-//    private List<WebElement> orderButtons;
-//
-//    @FindBy(xpath = "//div[@class='redblock']")
-//    private WebElement errors;
+    @FindBy(xpath = "//center/a")
+    private List<WebElement> listOfPages;
 
 }
