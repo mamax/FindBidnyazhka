@@ -3,14 +3,17 @@ package ua.tcb;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ua.tcb.data.UserData;
 import ua.tcb.pages.FirstStepBuy;
 import ua.tcb.pages.HomePage;
 import ua.tcb.pages.TravelPage;
+import ua.tcb.util.SendMail;
 import ua.tcb.webdriver.BasicTestCase;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -80,7 +83,7 @@ public class FindPerson extends BasicTestCase {
             driver.findElements(By.xpath("//a[text()='Замовити']")).get(j).click();
             FirstStepBuy firstStepBuy = new FirstStepBuy(driver);
             wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getH3tag()));
-            System.out.println("----- " + firstStepBuy.getH3tag().getText() + "------");
+            System.out.println("-----" + firstStepBuy.getH3tag().getText() + "-----");
 
             if (isPresentAndDisplayed(firstStepBuy.getContentBlock().getErrorMsg())){
                 System.out.println(firstStepBuy.getContentBlock().getErrorMsg().getText());
@@ -89,11 +92,12 @@ public class FindPerson extends BasicTestCase {
             else
             {
                 firstStepBuy.getContentBlock().registerClick();
-                if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
-                    System.out.println(firstStepBuy.getErrorMsg().getText());
-                    navigateBackTwoTimes();
-                }
-                else {
+//                if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
+//                    System.out.println(firstStepBuy.getErrorMsg().getText());
+//                    navigateBackTwoTimes();
+//                }
+//                else {
+                    wait.until(ExpectedConditions.visibilityOfAllElements(firstStepBuy.getContentBlock().getRadioBtns()));
                     for (int rr=0; rr < firstStepBuy.getContentBlock().getRadioBtns().size(); rr++) {
 
                         firstStepBuy.getContentBlock().getRadioBtns().get(rr).click();
@@ -112,7 +116,7 @@ public class FindPerson extends BasicTestCase {
                         }
                     }
                     navigateBackTwoTimes();
-                }
+//                }
             }
         }
     }
@@ -121,5 +125,32 @@ public class FindPerson extends BasicTestCase {
         driver.navigate().back();
         driver.navigate().back();
     }
+
+    @AfterSuite
+    public void mailScreenshot() throws Exception {
+        String[] to = {admin.name};
+
+        String[] cc = {};
+        String[] bcc = {};
+
+        SendMail.sendMail("maksim.mazurkevych@gmail.com",
+                "rfted654iunb",
+                "smtp.gmail.com",
+                "465",
+                "true",
+                "true",
+                true,
+                "javax.net.ssl.SSLSocketFactory",
+                "false",
+                to,
+                cc,
+                bcc,
+                nameToFind + new java.util.Date().toString(),
+                "Please find the reports attached.\n\n Regards\nQA Automation",
+                System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
+                nameToFind + ".jpg");
+        System.out.println(" ------- Mail was successfully sent ---------");
+    }
+
 
 }
