@@ -79,31 +79,38 @@ public class FindPerson extends BasicTestCase {
         for (int j = 0; j < driver.findElements(By.xpath("//a[text()='Замовити']")).size(); j++){
             driver.findElements(By.xpath("//a[text()='Замовити']")).get(j).click();
             FirstStepBuy firstStepBuy = new FirstStepBuy(driver);
+            wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getH3tag()));
+            System.out.println("----- " + firstStepBuy.getH3tag().getText() + "------");
 
             if (isPresentAndDisplayed(firstStepBuy.getContentBlock().getErrorMsg())){
+                System.out.println(firstStepBuy.getContentBlock().getErrorMsg().getText());
                 driver.navigate().back();
             }
             else
             {
                 firstStepBuy.getContentBlock().registerClick();
                 if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
+                    System.out.println(firstStepBuy.getErrorMsg().getText());
                     navigateBackTwoTimes();
                 }
                 else {
-                    firstStepBuy.getContentBlock().radioBtnClick();
-                    System.out.println("----- " + firstStepBuy.getH3tag().getText() + "------");
-                    wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getContentBlock().getPlaceTable()));
+                    for (int rr=0; rr < firstStepBuy.getContentBlock().getRadioBtns().size(); rr++) {
 
-                    for (int tr = 1; tr <= firstStepBuy.getContentBlock().getListOfTrs().size(); tr++)
-                        for (int td = 1; td <= firstStepBuy.getContentBlock().getListOfTds().size(); td++) {
-                            System.out.println(driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title"));
-                            if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains(nameToFind)) {
-                                System.out.println("found");
-                                captureScreenShot(nameToFind);
-                                navigateBackTwoTimes();
-                                break outer;
+                        firstStepBuy.getContentBlock().getRadioBtns().get(rr).click();
+                        wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getContentBlock().getPlaceTable()));
+
+                        for (int tr = 1; tr <= firstStepBuy.getContentBlock().getListOfTrs().size(); tr++) {
+                            for (int td = 1; td <= firstStepBuy.getContentBlock().getListOfTds().size(); td++) {
+                                System.out.println(driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title"));
+                                if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains(nameToFind)) {
+                                    System.out.println("Found " + nameToFind + ", which sits on row "+ tr + " and col "+ td);
+                                    captureScreenShot(nameToFind);
+//                                    navigateBackTwoTimes();
+                                    break outer;
+                                }
                             }
                         }
+                    }
                     navigateBackTwoTimes();
                 }
             }

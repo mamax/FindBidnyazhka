@@ -27,13 +27,13 @@ public class ContentBlock extends CommElements {
     @FindBy(xpath = "//table[@class='bus']")
     private WebElement placeTable;
 
+    public List<WebElement> getRadioBtns() {
+        return radioBtn;
+    }
+
     @Name("radio button")
     @FindBy(xpath = "//input[@type='radio']")
-    private WebElement radioBtn;
-
-    public void radioBtnClick() {
-        radioBtn.click();
-    }
+    private List<WebElement> radioBtn;
 
     @FindBy(xpath = "//input[@value='Зареєструвати!']")
     private WebElement register;
