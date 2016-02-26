@@ -22,6 +22,8 @@ import java.io.IOException;
 @Listeners(ua.tcb.webdriver.Screenshot.class)
 public class FindPerson extends BasicTestCase {
 
+    File fileToSent = new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg");
+
     public void logToApp(UserData admin) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
@@ -133,22 +135,25 @@ public class FindPerson extends BasicTestCase {
         String[] cc = {};
         String[] bcc = {};
 
-        SendMail.sendMail("maksim.mazurkevych@gmail.com",
-                "rfted654iunb",
-                "smtp.gmail.com",
-                "465",
-                "true",
-                "true",
-                true,
-                "javax.net.ssl.SSLSocketFactory",
-                "false",
-                to,
-                cc,
-                bcc,
-                nameToFind + new java.util.Date().toString(),
-                "Please find the reports attached.\n\n Regards\nQA Automation",
-                System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
-                nameToFind + ".jpg");
+        if (fileToSent.exists()) {
+
+            SendMail.sendMail("maksim.mazurkevych@gmail.com",
+                    "rfted654iunb",
+                    "smtp.gmail.com",
+                    "465",
+                    "true",
+                    "true",
+                    true,
+                    "javax.net.ssl.SSLSocketFactory",
+                    "false",
+                    to,
+                    cc,
+                    bcc,
+                    nameToFind + new java.util.Date().toString(),
+                    "Please find the reports attached.\n\n Regards\nQA Automation",
+                    System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
+                    nameToFind + ".jpg");
+            }
     }
 
 
