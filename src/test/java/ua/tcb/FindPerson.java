@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ua.tcb.pages.FirstStepBuy;
 import ua.tcb.pages.HomePage;
@@ -15,6 +16,7 @@ import java.io.IOException;
 /**
  * Created by Maksym_Mazurkevych on 2/24/2016.
  */
+@Listeners(ua.tcb.webdriver.Screenshot.class)
 public class FindPerson extends BasicTestCase {
 
     @BeforeMethod

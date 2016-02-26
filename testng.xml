@@ -4,6 +4,10 @@
 
 <suite name="Suite" >
 
+  <listeners>
+    <listener class-name="ua.tcb.webdriver.Screenshot" />
+  </listeners>
+
   <test name="Test" preserve-order="false">
 
     <classes>
