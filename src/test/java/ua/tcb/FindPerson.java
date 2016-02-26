@@ -3,9 +3,9 @@ package ua.tcb;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import ua.tcb.data.UserData;
 import ua.tcb.pages.FirstStepBuy;
 import ua.tcb.pages.HomePage;
 import ua.tcb.pages.TravelPage;
@@ -19,8 +19,7 @@ import java.io.IOException;
 @Listeners(ua.tcb.webdriver.Screenshot.class)
 public class FindPerson extends BasicTestCase {
 
-    @BeforeMethod
-    public void logToApp() throws InterruptedException {
+    public void logToApp(UserData admin) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         HomePage homePage = new HomePage(driver);
@@ -58,7 +57,8 @@ public class FindPerson extends BasicTestCase {
     }
 
     @Test
-    public void testFindPerson() throws IOException {
+    public void testFindPerson() throws IOException, InterruptedException {
+        logToApp(admin);
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         HomePage homePage = new HomePage(driver);
