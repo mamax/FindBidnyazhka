@@ -139,7 +139,7 @@ public class SendMail extends BasicTestCase {
             transport.sendMessage(msg, msg.getAllRecipients());
 
             transport.close();
-
+            System.out.println(" ------- Mail was successfully sent ---------");
             return true;
 
         } catch (Exception mex)
@@ -147,7 +147,7 @@ public class SendMail extends BasicTestCase {
         {
 
             mex.printStackTrace();
-
+            System.out.println(" ------- Mail was not sent ---------");
             return false;
 
         }
