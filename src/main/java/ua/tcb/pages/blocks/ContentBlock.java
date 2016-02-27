@@ -32,7 +32,7 @@ public class ContentBlock extends CommElements {
     }
 
     @Name("radio button")
-    @FindBy(xpath = "//input[@type='radio']")
+    @FindBy(xpath = "//input[@name='bus']")
     private List<WebElement> radioBtn;
 
     @FindBy(xpath = "//input[@value='Зареєструвати!']")

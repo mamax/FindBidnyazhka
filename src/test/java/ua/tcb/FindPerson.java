@@ -94,11 +94,11 @@ public class FindPerson extends BasicTestCase {
             else
             {
                 firstStepBuy.getContentBlock().registerClick();
-//                if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
-//                    System.out.println(firstStepBuy.getErrorMsg().getText());
-//                    navigateBackTwoTimes();
-//                }
-//                else {
+                if (isPresentAndDisplayed(firstStepBuy.getErrorMsg())){
+                    System.out.println(firstStepBuy.getErrorMsg().getText());
+                    navigateBackTwoTimes();
+                }
+                else {
                     wait.until(ExpectedConditions.visibilityOfAllElements(firstStepBuy.getContentBlock().getRadioBtns()));
                     for (int rr=0; rr < firstStepBuy.getContentBlock().getRadioBtns().size(); rr++) {
 
@@ -118,7 +118,7 @@ public class FindPerson extends BasicTestCase {
                         }
                     }
                     navigateBackTwoTimes();
-//                }
+                }
             }
         }
     }
