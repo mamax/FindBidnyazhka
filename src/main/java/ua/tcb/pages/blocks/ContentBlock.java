@@ -21,7 +21,7 @@ public class ContentBlock extends CommElements {
     private List<WebElement> listOfTds;
 
     @FindBy(xpath = "//table[@class='bus']")
-    private List<WebElement> tables;
+    private List<WebElement> ListOfTables;
 
     public WebElement getPlaceTable() {
         return placeTable;
@@ -61,6 +61,6 @@ public class ContentBlock extends CommElements {
     }
 
     public List<WebElement> getListOfTables() {
-        return tables;
+        return ListOfTables;
     }
 }

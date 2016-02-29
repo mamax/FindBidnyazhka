@@ -36,7 +36,7 @@ public class FindPerson extends BasicTestCase {
 
         Thread.sleep(9000L);
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='facebook']/a")));
+//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@id='facebook']/a")));
         driver.findElement(By.xpath("//div[@id='facebook']/a")).click();
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
