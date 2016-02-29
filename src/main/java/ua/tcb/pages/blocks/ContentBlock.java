@@ -14,11 +14,14 @@ import java.util.List;
 @FindBy(xpath = "//div[@class='contentpadding']")
 public class ContentBlock extends CommElements {
 
-    @FindBy(xpath = "//table[@class='bus']/tbody/tr")
+    @FindBy(xpath = "//table[@id='flor1']/tbody/tr")
     private List<WebElement> listOfTrs;
 
-    @FindBy(xpath = "//table[@class='bus']/tbody/tr[1]/td")
+    @FindBy(xpath = "//table[@id='flor1']/tbody/tr[1]/td")
     private List<WebElement> listOfTds;
+
+    @FindBy(xpath = "//table[@class='bus']")
+    private List<WebElement> tables;
 
     public WebElement getPlaceTable() {
         return placeTable;
@@ -55,5 +58,9 @@ public class ContentBlock extends CommElements {
 
     public List<WebElement> getListOfTds() {
         return listOfTds;
+    }
+
+    public List<WebElement> getListOfTables() {
+        return tables;
     }
 }

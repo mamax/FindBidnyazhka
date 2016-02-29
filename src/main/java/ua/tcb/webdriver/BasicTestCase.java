@@ -21,7 +21,7 @@ public class BasicTestCase {
     public static FirefoxDriver driver = null;
     protected boolean isFound = false;
     protected static String baseUrl =  "https://tcb.vn.ua";
-    protected static String nameToFind = "Никитюк";
+    protected static String nameToFind = "Шаповалюк";
 //    private static boolean isInitialized = false;
 //    public static Properties CONFIG = null;
 
