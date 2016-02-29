@@ -19,7 +19,7 @@ public class BasicTestCase {
     public static final String BROWSER_FF = "firefox";
     private static boolean isBrowserOpened = false;
     public static FirefoxDriver driver = null;
-
+    protected boolean isFound = false;
     protected static String baseUrl =  "https://tcb.vn.ua";
     protected static String nameToFind = "Никитюк";
 //    private static boolean isInitialized = false;

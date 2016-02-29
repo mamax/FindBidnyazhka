@@ -73,13 +73,16 @@ public class FindPerson extends BasicTestCase {
         selectJourney(wait);
 
         //some code to go on father pages
-        for (int i = 0; i < travelPage.getListOfPages().size() - 1; i++) {
-            driver.get(baseUrl +"/travel/?pageq=" + (2+i));
-            selectJourney(wait);
+        if (!isFound) {
+            for (int i = 0; i < travelPage.getListOfPages().size() - 1; i++) {
+                driver.get(baseUrl + "/travel/?pageq=" + (2 + i));
+                selectJourney(wait);
+            }
         }
     }
 
     private void selectJourney(WebDriverWait wait) throws IOException {
+        if (!isFound){
         outer:
         for (int j = 0; j < driver.findElements(By.xpath("//a[text()='Замовити']")).size(); j++){
             driver.findElements(By.xpath("//a[text()='Замовити']")).get(j).click();
@@ -100,7 +103,7 @@ public class FindPerson extends BasicTestCase {
                 }
                 else {
                     wait.until(ExpectedConditions.visibilityOfAllElements(firstStepBuy.getContentBlock().getRadioBtns()));
-                    for (int rr=0; rr < firstStepBuy.getContentBlock().getRadioBtns().size(); rr++) {
+                        for (int rr = 0; rr < firstStepBuy.getContentBlock().getRadioBtns().size(); rr++) {
 
                         firstStepBuy.getContentBlock().getRadioBtns().get(rr).click();
                         wait.until(ExpectedConditions.visibilityOf(firstStepBuy.getContentBlock().getPlaceTable()));
@@ -111,7 +114,8 @@ public class FindPerson extends BasicTestCase {
                                 if (driver.findElement(By.xpath("//table[@class='bus']/tbody/tr[" + tr + "]/td[" + td + "]")).getAttribute("title").contains(nameToFind)) {
                                     System.out.println("Found " + nameToFind + ", which sits on row "+ tr + " and col "+ td);
                                     captureScreenShot(nameToFind);
-//                                    navigateBackTwoTimes();
+                                    isFound = true;
+                                    navigateBackTwoTimes();
                                     break outer;
                                 }
                             }
@@ -119,8 +123,10 @@ public class FindPerson extends BasicTestCase {
                     }
                     navigateBackTwoTimes();
                 }
+                }
             }
         }
+
     }
 
     private void navigateBackTwoTimes() {
