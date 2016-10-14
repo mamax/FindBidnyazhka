@@ -3,10 +3,10 @@
  */
 package ua.tcb.webdriver;
 
-import org.apache.log4j.Logger;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
+import org.testng.log4testng.Logger;
 
 import java.io.File;
 

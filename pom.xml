@@ -47,16 +47,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ru.yandex.qatools.htmlelements</groupId>
-            <artifactId>htmlelements-all</artifactId>
-            <version>${htmlelements.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>velocity</groupId>
             <artifactId>velocity</artifactId>
             <version>1.4</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -85,18 +78,6 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>javax.mail-api</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mailapi</artifactId>
-            <version>1.4.3</version>
         </dependency>
 
         <!-- Java Mail API -->
