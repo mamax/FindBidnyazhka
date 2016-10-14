@@ -9,11 +9,9 @@
   </listeners>
 
   <test name="Test" preserve-order="false">
-
     <classes>
       <class name="ua.tcb.FindPerson"/>
     </classes>
-
   </test>
 
 </suite>

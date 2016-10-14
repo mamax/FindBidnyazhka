@@ -11,56 +11,21 @@ import java.util.List;
  * Created by msks on 24.02.2016.
  */
 @Name("Content block")
-@FindBy(xpath = "//div[@class='contentpadding']")
+@FindBy(xpath = "//div[@class='yourorser biginfotrip obr']")
 public class ContentBlock extends CommElements {
 
-    @FindBy(xpath = "//table[@id='flor1']/tbody/tr")
-    private List<WebElement> listOfTrs;
-
-    @FindBy(xpath = "//table[@id='flor1']/tbody/tr[1]/td")
-    private List<WebElement> listOfTds;
-
-    @FindBy(xpath = "//table[@class='bus']")
-    private List<WebElement> ListOfTables;
-
-    public WebElement getPlaceTable() {
-        return placeTable;
-    }
-
-    @FindBy(xpath = "//table[@class='bus']")
-    private WebElement placeTable;
-
-    public List<WebElement> getRadioBtns() {
-        return radioBtn;
-    }
-
-    @Name("radio button")
-    @FindBy(xpath = "//input[@name='bus']")
-    private List<WebElement> radioBtn;
-
-    @FindBy(xpath = "//input[@value='Зареєструвати!']")
+    @FindBy(xpath = "//div[@class='allbut']")
     private WebElement register;
 
     public void registerClick() {
         register.click();
     }
 
-    public WebElement getErrorMsg() {
-        return errorMsg;
+    public WebElement getPlacesAbsent() {
+        return placesAbsent;
     }
 
-    @FindBy(xpath = "//div[@class='redblock']")
-    private WebElement errorMsg;
+    @FindBy(xpath = "//span[text()='Місць немає!']")
+    private WebElement placesAbsent;
 
-    public List<WebElement> getListOfTrs() {
-        return listOfTrs;
-    }
-
-    public List<WebElement> getListOfTds() {
-        return listOfTds;
-    }
-
-    public List<WebElement> getListOfTables() {
-        return ListOfTables;
-    }
 }

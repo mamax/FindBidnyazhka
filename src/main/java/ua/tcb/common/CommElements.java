@@ -11,12 +11,18 @@ import java.util.List;
 @FindBy(xpath="//div[contains(@class,'main')]")
 public class CommElements extends HtmlElement {
 
-    private static final String BROWSER_FF = "firefox";
-//    protected WebDriver driver;
+    public void ClearAndType(WebElement webElement, String text){
+        webElement.clear();
+        webElement.sendKeys(text);
+    }
 
-    public void typeIn(WebElement element, String text) {
-        element.clear();
-        element.sendKeys(text);
+    protected boolean isElementPresent(WebElement element) {
+        try {
+            element.isDisplayed();
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     protected boolean isPresentAndDisplayed(WebElement element) {

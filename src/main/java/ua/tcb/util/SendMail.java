@@ -16,10 +16,39 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.util.Date;
 import java.util.Properties;
 
 
 public class SendMail extends BasicTestCase {
+
+//    protected File fileToSent = new File(System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg");
+
+    public static void mailScreenShot() throws Exception {
+        String[] to = {"maksim.mazurkevych@gmail.com"};
+        String[] cc = {};
+        String[] bcc = {};
+
+            SendMail.sendMail("maksim.mazurkevych@gmail.com",
+                    "rfted654iunb",
+                    "smtp.gmail.com",
+                    "465",
+                    "true",
+                    "true",
+                    true,
+                    "javax.net.ssl.SSLSocketFactory",
+                    "false",
+                    to,
+                    cc,
+                    bcc,
+                    nameToFind + new Date().toString(),
+                    "Please find the reports attached.\n\n Regards\nQA Automation",
+                    System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
+                    nameToFind + ".jpg");
+
+        System.out.println("ScreenShot was sent");
+    }
 
     public static boolean sendMail(String userName,
                                    String passWord,

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ua.tcb.pages.blocks.ContentBlock;
+import ua.tcb.pages.blocks.RegisterBlock;
 
 /**
  * Created by Maksym_Mazurkevych on 2/25/2016.
@@ -16,7 +17,7 @@ public class FirstStepBuy extends Page {
     }
 
     @Override
-    public void open(String text) {
+    public void open() {
     }
 
     public ContentBlock getContentBlock() {
@@ -25,6 +26,12 @@ public class FirstStepBuy extends Page {
 
     private ContentBlock contentBlock;
 
+    public RegisterBlock getRegisterBlock() {
+        return registerBlock;
+    }
+
+    private RegisterBlock registerBlock;
+
     public WebElement getErrorMsg() {
         return errorMsg;
     }
@@ -32,7 +39,7 @@ public class FirstStepBuy extends Page {
     @FindBy(xpath = "//div[@class='redblock']")
     private WebElement errorMsg;
 
-    @FindBy(xpath = "//h3")
+    @FindBy(xpath = "//div[@class='tourtext']/h1")
     private WebElement h3tag;
 
     public WebElement getH3tag() {

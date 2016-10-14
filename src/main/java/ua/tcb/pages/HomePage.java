@@ -9,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HomePage extends Page {
 
-    @FindBy(xpath = "//a[@id='uLogin']/img")
+    @FindBy(xpath = "//a[@href='/login/']")
     private WebElement logToolbar;
 
-    @FindBy(xpath = "//a[@href='/travel/']")
+    @FindBy(xpath = "//a[@href='/trips/']")
     private WebElement travel;
 
     public WebElement getLogout() {
@@ -27,15 +27,16 @@ public class HomePage extends Page {
     }
 
     @Override
-    public void open(String text) {
+    public void open() {
         driver.get(baseUrl);
     }
 
-    public void loginToolbarClick() {
+    public LoginPage loginToolbarClick() {
         logToolbar.click();
+        return new LoginPage(driver);
     }
 
-    public TravelPage navigateToTravelPage(){
+    public TravelPage navigateToTripsPage(){
         travel.click();
         return new TravelPage(driver);
     }

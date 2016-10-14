@@ -11,12 +11,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jdk.version>1.6</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <testng.version>6.8.13</testng.version>
 
         <!-- Dependencies Versions -->
         <htmlelements.version>1.14</htmlelements.version>
-        <selenium.version>2.52.0</selenium.version>
+        <selenium.version>2.53.1</selenium.version>
     </properties>
 
     <repositories>
