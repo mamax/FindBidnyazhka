@@ -1,11 +1,13 @@
 package ua.tcb.webdriver;
 
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import ua.tcb.data.UserData;
 
 import java.io.File;
@@ -58,11 +60,15 @@ public class BasicTestCase {
         return is;
     }
 
+    @BeforeTest
+    public static void setupClass() {
+        ChromeDriverManager.getInstance().setup();
+    }
+
     @BeforeClass
     public static WebDriver setUp() throws IOException {
         if (!isBrowserOpened) {
 
-            System.setProperty("webdriver.chrome.driver",  getBrowserPath("chromedriver.exe"));
             driver = new ChromeDriver();
             System.out.println("Opening Chrome");
             isBrowserOpened = true;
@@ -89,11 +95,6 @@ public class BasicTestCase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static String getBrowserPath(String fileName) throws IOException {
-        return new File(".").getCanonicalPath()+ File.separator + "src"+ File.separator +"main"+ File.separator +"resources"+ File.separator + "browsers"+ File.separator +
-                fileName ;
     }
 
 }

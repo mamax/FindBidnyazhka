@@ -10,8 +10,6 @@ import ua.tcb.pages.*;
 import ua.tcb.util.SendMail;
 import ua.tcb.webdriver.BasicTestCase;
 
-import java.io.File;
-
 /**
  * Created by Maksym_Mazurkevych on 2/24/2016.
  */
