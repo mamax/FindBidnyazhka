@@ -16,7 +16,7 @@
 
         <!-- Dependencies Versions -->
         <htmlelements.version>1.14</htmlelements.version>
-        <selenium.version>2.53.1</selenium.version>
+        <selenium.version>3.0.1</selenium.version>
     </properties>
 
     <repositories>
