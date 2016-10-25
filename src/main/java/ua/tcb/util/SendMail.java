@@ -42,7 +42,7 @@ public class SendMail extends BasicTestCase {
                     to,
                     cc,
                     bcc,
-                    nameToFind + new Date().toString(),
+                    "Found person " + nameToFind + " " + new Date().toString(),
                     "Please find the reports attached.\n\n Regards\nQA Automation",
                     System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
                     nameToFind + ".jpg");
