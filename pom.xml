@@ -126,6 +126,12 @@
                             <value>target/surefire-reports/html</value>
                         </property>
                     </properties>
+                    <systemPropertyVariables>
+                        <property>
+                            <name>personSurname</name>
+                            <value>${PERSONSURNAME}</value>
+                        </property>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>

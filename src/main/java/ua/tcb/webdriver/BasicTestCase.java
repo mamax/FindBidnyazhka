@@ -4,14 +4,10 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import ua.tcb.data.UserData;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.NoSuchFileException;
@@ -41,9 +37,10 @@ public class BasicTestCase {
     }
 
     @BeforeSuite
-    public static String initName() throws IOException {
-        config.load(getResource("config.properties"));
-        nameToFind = config.getProperty("name");
+    @Parameters({"personSurname"})
+    public static String initName(String personSurname) {
+        nameToFind = personSurname;
+        System.out.println("name, which you trying to find =  "+ nameToFind);
         return nameToFind;
     }
 
