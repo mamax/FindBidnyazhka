@@ -44,7 +44,7 @@ public class BasicTestCase {
     public static String initName() throws IOException {
         config.load(getResource("config.properties"));
         nameToFind = config.getProperty("name");
-        System.out.println("name, which I try to find" + nameToFind);
+        System.out.println("Name, which I try to find " + nameToFind);
         return nameToFind;
     }
 

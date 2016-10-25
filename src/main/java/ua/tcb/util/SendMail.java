@@ -1,8 +1,5 @@
 package ua.tcb.util;
 
-
-//set CLASSPATH=%CLASSPATH%;activation.jar;mail.jar
-
 import ua.tcb.webdriver.BasicTestCase;
 
 import javax.activation.DataHandler;
@@ -42,7 +39,7 @@ public class SendMail extends BasicTestCase {
                     to,
                     cc,
                     bcc,
-                    nameToFind + new Date().toString(),
+                    "Found name " + nameToFind + " " + new Date().toString(),
                     "Please find the reports attached.\n\n Regards\nQA Automation",
                     System.getProperty("user.dir") + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "html" + File.separator + nameToFind + ".jpg",
                     nameToFind + ".jpg");
