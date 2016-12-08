@@ -1,6 +1,8 @@
 package ua.tcb.util;
 
-import ua.tcb.webdriver.BasicTestCase;
+import java.io.File;
+import java.util.Date;
+import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -13,9 +15,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import java.io.File;
-import java.util.Date;
-import java.util.Properties;
+
+import ua.tcb.webdriver.BasicTestCase;
 
 
 public class SendMail extends BasicTestCase {
@@ -28,7 +29,7 @@ public class SendMail extends BasicTestCase {
         String[] bcc = {};
 
             SendMail.sendMail("maksim.mazurkevych@gmail.com",
-                    "rfted654iunb",
+                    "pass",
                     "smtp.gmail.com",
                     "465",
                     "true",
